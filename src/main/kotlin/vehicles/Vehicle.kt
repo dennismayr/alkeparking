@@ -1,0 +1,3 @@
+package vehicles
+
+class Vehicle

@@ -18,4 +18,9 @@ fun main() {
     After the first 2 hours: additional:
     - $5 every 15 minutes
     * */
+
+    // 'class Vehicle' must contain vehicle type
+    // Interface to implement costs
+
+
 }
