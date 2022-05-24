@@ -1,3 +1,8 @@
 package parking
 
-class Parking
+import vehicles.Vehicle
+
+data class Parking(val vehicles : MutableSet<Vehicle>){
+
+    
+}
