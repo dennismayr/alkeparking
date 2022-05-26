@@ -1,21 +1,26 @@
 fun main() {
-    println("Bienvenidos a AlkeParking®")
+    println("Welcome to AlkeParking®")
 
     /*
-    Distintos tipos de vehículos:
-    - Autos
-    - Motos
+    Different vehicle types:
+    - Cars
+    - Motorcycles
     - Minibuses
     - Buses
 
-    Costos
-    - Primeras 1 horas:
-      * Autos: $20
-      * Motos: $15
+    Costs
+    - First 2 hours:
+      * Cars: $20
+      * Motorcycles: $15
       * Minibuses: $25
       * Buses: $30
 
-    Luego de las primeras 2 horas: adicional:
-    - $5 cada 15 minutos
+    After the first 2 hours: additional:
+    - $5 every 15 minutes
     * */
+
+    // 'class Vehicle' must contain vehicle type
+    // Interface to implement costs
+
+
 }
