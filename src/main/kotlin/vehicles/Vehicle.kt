@@ -1,13 +1,12 @@
 package vehicles
 
-import utils.VehicleCost
+import java.util.*
 
 data class Vehicle(
     val plate: String,
-    val vehicleType: VehicleCost,
-    val checkInTime: Long,
-    val parkedTime: Long,
-    val discountCard: Boolean
+    val vehicleType: Int,
+    val checkInTime: Calendar,
+    val discountCard: Boolean = false
 ) {
 
     override fun equals(other: Any?): Boolean {
@@ -20,7 +19,5 @@ data class Vehicle(
 
     override fun hashCode() = this.plate.hashCode()
 
-    // Por mover a otra clase, por mientras acá
-    fun totalTime(checkIn: Long, checkout: Long) = (checkout - checkIn).toInt()
 
 }
