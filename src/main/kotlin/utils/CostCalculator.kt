@@ -17,13 +17,22 @@ class CostCalculator {
     // Llamar lista de vehículos para tomar tipo y aplicar costo
     // var parkedTime = totalTime()
     fun parkingCost(totalTime: Int, vehicle: Vehicle): Int {
-        return when {
+        val totalParkingCost = when {
             totalTime <= 2 -> vehicle.vehicleType
             totalTime > 2 -> {
-                vehicle.vehicleType += (vehicle.vehicleType * 0.25).roundToInt()
+                (vehicle.vehicleType + with(totalTime - 2) {
+                    var five = 0
+                    while (this > 0) {
+                        five += 15
+                        this - 15
+                    }
+                    five
+                })
             }
-            else -> {}
+            else -> 0
         }
+        if (vehicle.discountCard) return totalParkingCost * 0.015.toInt()
+        return totalParkingCost
     }
 
     fun calculate(listVehicle: Vehicle, operation: (Vehicle) -> Long) {
