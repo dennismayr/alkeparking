@@ -58,5 +58,4 @@ data class ParkingSpace(val vehicleParkingSpace: Vehicle, val instanceParking: P
         println("Sorry, check-out failed")
         // function return error to do checkOutVehicle
     }
-
 }

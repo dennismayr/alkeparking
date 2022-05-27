@@ -13,11 +13,8 @@ data class Vehicle(
         if (other is Vehicle) {
             return this.plate == other.plate
         }
-
         return super.equals(other)
     }
 
     override fun hashCode() = this.plate.hashCode()
-
-
 }

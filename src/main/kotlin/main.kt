@@ -46,12 +46,7 @@ fun main() {
     listParking.forEach {
         println(parking.addVehicle(it))
     }
-
-
-
     parking.vehicles.remove(motorCycle)
 
     //println(parking.addVehicle(car))
-
-
 }
