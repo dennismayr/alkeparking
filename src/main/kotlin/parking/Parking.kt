@@ -11,9 +11,9 @@ data class Parking(val vehicles : MutableSet<Vehicle>){
     fun addVehicle(vehicle: Vehicle): String {  // Function for addVehicle, return success or error
         return with(vehicles) {
             when {
-                this.size == 19 -> "Sorry, the check-in falled"
+                this.size == 19 -> "Sorry, check-in failed"
                 this.add(vehicle) -> "Welcome to AlkeParking"
-                else -> "Sorry, the check-in falled"
+                else -> "Sorry, check-in failed"
             }
         }
     }
@@ -39,7 +39,7 @@ data class Parking(val vehicles : MutableSet<Vehicle>){
             totalEarnings += vehicleRemoved.second
             totalEarnings
         })
-        println("${vehicleRemoved.first} vehicles have checked out and have eamings of ${vehicleRemoved.second}")
+        println("${vehicleRemoved.first} vehicles have checked out and have earnings of ${vehicleRemoved.second}")
     }
 
 

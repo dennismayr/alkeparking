@@ -51,7 +51,7 @@ data class ParkingSpace(val vehicleParkingSpace: Vehicle, val instanceParking: P
     }
 
     private fun onError() {  // function for happen error
-        println("Sorry, the check-out failed")
+        println("Sorry, check-out failed")
         // function return error to do checkOutVehicle
     }
 
