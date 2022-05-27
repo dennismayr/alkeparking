@@ -29,18 +29,17 @@ fun main() {
 
     val car = Vehicle("AA111AA", VehicleCost.CAR.type, Calendar.getInstance(), "DISCOUNT_CARD_001")
     val motorCycle = Vehicle("B822BBB", VehicleCost.MOTORCYCLE.type, Calendar.getInstance())
-    val minuBus = Vehicle("CC333CC", VehicleCost.MINIBUS.type, Calendar.getInstance())
-    val bus = Vehicle("DD44400", VehicleCost.BUS.type, Calendar.getInstance(),"DISCOUNT_CARD_002")
+    val miniBus = Vehicle("CC333CC", VehicleCost.MINIBUS.type, Calendar.getInstance())
+    val bus = Vehicle("DD44400", VehicleCost.BUS.type, Calendar.getInstance(), "DISCOUNT_CARD_002")
     val car2 = Vehicle("AA111AA", VehicleCost.CAR.type, Calendar.getInstance())
 
-    val listParking =  arrayOf(car, motorCycle, minuBus, bus, car2)
+    val listParking = arrayOf(car, motorCycle, miniBus, bus, car2)
     val parking = Parking(mutableSetOf())
-
 
 
     //println(parking.vehicles.contains(car))
     //println(parking.vehicles.contains(motorCycle))
-    //println(parking.vehicles.contains(minuBus))
+    //println(parking.vehicles.contains(miniBus))
     //println(parking.vehicles.contains(bus))
     //println(parking.addVehicle(car2))
 

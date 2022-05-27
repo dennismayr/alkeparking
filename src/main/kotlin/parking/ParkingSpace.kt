@@ -19,11 +19,15 @@ data class ParkingSpace(val vehicleParkingSpace: Vehicle, val instanceParking: P
 
     // Llamar lista de vehículos para tomar tipo y aplicar costo
     // var parkedTime = totalTime()
-    private fun calculateFee(vehiculeType: Int, totalTime: Int, hasDiscountCard: String?): Int {  // function for calculate the parkingCost
+    private fun calculateFee(
+        vehicleType: Int,
+        totalTime: Int,
+        hasDiscountCard: String?
+    ): Int {  // function for calculate the parkingCost
         val totalParkingCost = when {
-            totalTime <= 2 -> vehiculeType
+            totalTime <= 2 -> vehicleType
             totalTime > 2 -> {
-                (vehiculeType + with(totalTime - 2) {
+                (vehicleType + with(totalTime - 2) {
                     var five = 0
                     while (this > 0) {
                         five += 5
@@ -51,7 +55,7 @@ data class ParkingSpace(val vehicleParkingSpace: Vehicle, val instanceParking: P
     }
 
     private fun onError() {  // function for happen error
-        println("Sorry, the check-out failed")
+        println("Sorry, check-out failed")
         // function return error to do checkOutVehicle
     }
 
