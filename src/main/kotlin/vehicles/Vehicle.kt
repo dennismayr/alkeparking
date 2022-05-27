@@ -6,7 +6,7 @@ data class Vehicle(
     val plate: String,
     val vehicleType: Int,
     val checkInTime: Calendar,
-    val discountCard: Boolean = false
+    val discountCard: String? = null,
 ) {
 
     override fun equals(other: Any?): Boolean {
