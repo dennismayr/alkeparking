@@ -48,5 +48,10 @@ fun main() {
     }
     parking.vehicles.remove(motorCycle)
 
-    //println(parking.addVehicle(car))
+    // Testing
+//    println(listParking.asList())
+
+//    fun totalTime(checkInTime: Calendar) =
+//        (Calendar.getInstance().timeInMillis - checkInTime.timeInMillis).toInt() / 3600000
+//    println(totalTime(Calendar.getInstance()))
 }
