@@ -6,10 +6,11 @@ import java.util.*
 data class ParkingSpace(val vehicleParkingSpace: Vehicle, val instanceParking: Parking) {
 
     private var i: Int = 0
+    private val baseFee: Int = 120 // nuestra unidad de medida: minutos (así es más ordenado calcular el adicional)
 
     //val parkedTime : Long
     private fun totalTime(checkInTime: Calendar) =
-        (Calendar.getInstance().timeInMillis - checkInTime.timeInMillis).toInt() / 3600000
+        (Calendar.getInstance().timeInMillis - checkInTime.timeInMillis).toInt() / 60000 // retorna
 
     // if totalTime <= 2h -> totalTime = 2h
     // else if totalTime > 2h -> totalTime += 15m -> (totalTime + 15) <= (totalTime + 15)
@@ -25,15 +26,15 @@ data class ParkingSpace(val vehicleParkingSpace: Vehicle, val instanceParking: P
         hasDiscountCard: String?
     ): Int {  // function for calculate the parkingCost
         val totalParkingCost = when {
-            totalTime <= 2 -> vehicleType
-            totalTime > 2 -> {
+            totalTime <= baseFee -> vehicleType  // totalTime o totalTime()?
+            totalTime > baseFee -> {
                 (vehicleType + with(totalTime - 2) {
-                    var five = 0
+                    var additionalFee = 0
                     while (this > 0) {
-                        five += 5
+                        additionalFee += 5
                         this - 15
                     }
-                    five
+                    additionalFee
                 })
             }
             else -> 0
@@ -51,7 +52,7 @@ data class ParkingSpace(val vehicleParkingSpace: Vehicle, val instanceParking: P
     }
 
     private fun onSuccess(totalParkingCost: Int) {
-        println("Your fee is  $totalParkingCost, Come back soon")
+        println("Your fee is $totalParkingCost - Come back soon!")
     }
 
     private fun onError() {  // function for happen error
