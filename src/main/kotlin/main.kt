@@ -1,5 +1,5 @@
 import parking.Parking
-import utils.VehicleCost
+import utils.VehicleType
 import vehicles.Vehicle
 import java.util.*
 
@@ -27,11 +27,11 @@ fun main() {
     // 'class Vehicle' must contain vehicle type
     // Interface to implement costs
 
-    val car = Vehicle("AA111AA", VehicleCost.CAR.type, Calendar.getInstance(), "DISCOUNT_CARD_001")
-    val motorCycle = Vehicle("B822BBB", VehicleCost.MOTORCYCLE.type, Calendar.getInstance())
-    val miniBus = Vehicle("CC333CC", VehicleCost.MINIBUS.type, Calendar.getInstance())
-    val bus = Vehicle("DD44400", VehicleCost.BUS.type, Calendar.getInstance(), "DISCOUNT_CARD_002")
-    val car2 = Vehicle("AA111AA", VehicleCost.CAR.type, Calendar.getInstance())
+    val car = Vehicle("AA111AA", VehicleType.CAR.type, Calendar.getInstance(), "DISCOUNT_CARD_001")
+    val motorCycle = Vehicle("B822BBB", VehicleType.MOTORCYCLE.type, Calendar.getInstance())
+    val miniBus = Vehicle("CC333CC", VehicleType.MINIBUS.type, Calendar.getInstance())
+    val bus = Vehicle("DD44400", VehicleType.BUS.type, Calendar.getInstance(), "DISCOUNT_CARD_002")
+    val car2 = Vehicle("AA111AA", VehicleType.CAR.type, Calendar.getInstance())
 
     val listParking = arrayOf(car, motorCycle, miniBus, bus, car2)
     val parking = Parking(mutableSetOf())
