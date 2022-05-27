@@ -37,16 +37,16 @@ data class ParkingSpace(val vehicleParkingSpace: Vehicle, val instanceParking: P
         return hasDiscountCard?.let { totalParkingCost * 0.015.toInt() } ?: totalParkingCost
     }
 
-    private fun checkOutVehicle(plate: String, onSucess: (Int) -> Int, onError: (Unit)) {
+    private fun checkOutVehicle(plate: String, onSuccess: (Int) -> Int, onError: (Unit)) {
         instanceParking.searchableForPlate(plate)?.let {
             val cost =
-                onSucess(calculateFee(it.vehicleType, totalTime(it.checkInTime), it.discountCard))
+                onSuccess(calculateFee(it.vehicleType, totalTime(it.checkInTime), it.discountCard))
             instanceParking.remove(it)
             instanceParking.backUp(Pair(i++, cost))
         } ?: onError()
     }
 
-    private fun onSucess(totalParkingCost: Int) {
+    private fun onSuccess(totalParkingCost: Int) {
         println("Your fee is  $totalParkingCost, Come back soon")
     }
 

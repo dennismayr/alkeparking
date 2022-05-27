@@ -18,6 +18,10 @@ data class Parking(val vehicles : MutableSet<Vehicle>){
         }
     }
 
+    fun listPlateVehicles(){
+        vehicles.forEach { println(it.plate)}
+    }
+
     fun searchableForPlate(plate: String): Vehicle? {  // Function search vehicle for its plate
         return vehicles.find { it.plate == plate }
     }
