@@ -19,7 +19,7 @@ data class ParkingSpace(val vehicleParkingSpace: Vehicle, val instanceParking: P
     // if discountCard = true -> totalTime + (additionalTime * n) -> 15% off, donde 'n'= 15m adicionales
 
     // Llamar lista de vehículos para tomar tipo y aplicar costo
-    // var parkedTime = totalTime()
+
     private fun calculateFee(
         vehicleType: Int,
         totalTime: Int,
@@ -28,7 +28,7 @@ data class ParkingSpace(val vehicleParkingSpace: Vehicle, val instanceParking: P
         val totalParkingCost = when {
             totalTime <= baseFee -> vehicleType  // totalTime o totalTime()?
             totalTime > baseFee -> {
-                (vehicleType + with(totalTime - 2) {
+                (vehicleType + with(totalTime - baseFee) {
                     var additionalFee = 0
                     while (this > 0) {
                         additionalFee += 5
@@ -42,12 +42,13 @@ data class ParkingSpace(val vehicleParkingSpace: Vehicle, val instanceParking: P
         return hasDiscountCard?.let { totalParkingCost * 0.015.toInt() } ?: totalParkingCost
     }
 
-    private fun checkOutVehicle(plate: String, onSuccess: (Int) -> Int, onError: (Unit)) {
+    private fun checkOutVehicle(plate: String) {
         instanceParking.searchableForPlate(plate)?.let {
-            val cost =
-                onSuccess(calculateFee(it.vehicleType, totalTime(it.checkInTime), it.discountCard))
+            val parkedTime = totalTime(it.checkInTime)
+            val cost = calculateFee(it.vehicleType, parkedTime, it.discountCard)
+            onSuccess(cost)
             instanceParking.remove(it)
-            instanceParking.backUp(Pair(i++, cost))
+            instanceParking.backUp(Pair(i.inc(), cost))
         } ?: onError()
     }
 
