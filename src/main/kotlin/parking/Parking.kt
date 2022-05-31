@@ -1,6 +1,6 @@
 package parking
 
-import Models.Vehicle
+import models.Vehicle
 
 open class Parking {
     private var vehicleRemoved: Pair<Int, Int> = Pair(0, 0)

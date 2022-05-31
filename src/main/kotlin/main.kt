@@ -1,6 +1,6 @@
-import utils.VehicleType
-import Models.Vehicle
+import models.Vehicle
 import parking.ParkingSpace
+import utils.VehicleType
 import java.util.*
 
 fun main() {
