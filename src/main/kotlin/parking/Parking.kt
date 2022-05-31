@@ -1,45 +1,39 @@
 package parking
 
-import vehicles.Vehicle
+import Models.Vehicle
 
-data class Parking(val vehicles : MutableSet<Vehicle>){
-
+open class Parking {
     private lateinit var vehicleRemoved: Pair<Int, Int>
-    private var totalVehicleRemoved = 0
-    private var totalEarnings = 0
+    private val parkingSize = 20
+    private val vehicles: MutableSet<Vehicle> = mutableSetOf()
 
-    fun addVehicle(vehicle: Vehicle): String {  // Function for addVehicle, return success or error
+
+    fun addVehicle(vehicle: Vehicle): String {  // 'addVehicle' adds a vehicle, returns success or error
         return with(vehicles) {
             when {
-                this.size == 19 -> "Sorry, check-in failed"
+                this.size == parkingSize -> "Sorry, check-in failed"
                 this.add(vehicle) -> "Welcome to AlkeParking"
                 else -> "Sorry, check-in failed"
             }
         }
     }
 
-    fun listPlateVehicles(){
-        vehicles.forEach { println(it.plate)}
-    }
-
-    fun searchableForPlate(plate: String): Vehicle? {  // Function search vehicle for its plate
+    fun searchableForPlate(plate: String): Vehicle? {  // Function searches a vehicle by its plate
         return vehicles.find { it.plate == plate }
     }
 
 
-    fun remove(vehicle: Vehicle) {  // Function removed vehicle
+    fun remove(vehicle: Vehicle) {  //  This removes a vehicle from the list
         vehicles.remove(vehicle)
     }
 
-    fun backUp(vehicleRemoved: Pair<Int, Int>) {  // Function print total Removed vehicles of the parking and total earnings
-        this.vehicleRemoved = Pair(kotlin.run {
-            totalVehicleRemoved += vehicleRemoved.first
-            totalVehicleRemoved
-        }, kotlin.run {
-            totalEarnings += vehicleRemoved.second
-            totalEarnings
-        })
+    fun backUp(vehicleRemoved: Pair<Int, Int>) {  // Prints total removed vehicles from the parking, plus total earnings
+        this.vehicleRemoved = Pair(vehicleRemoved.first, vehicleRemoved.second)
         println("${vehicleRemoved.first} vehicles have checked out and have earnings of ${vehicleRemoved.second}")
+    }
+
+    fun listVehicles() { // List all parked vehicles
+        vehicles.forEach { println(it.plate) }
     }
 
 

@@ -1,63 +1,61 @@
 package parking
 
-import vehicles.Vehicle
 import java.util.*
 
-data class ParkingSpace(val vehicleParkingSpace: Vehicle, val instanceParking: Parking) {
+class ParkingSpace : Parking() {
 
-    private var i: Int = 0
-    private val baseFee: Int = 120 // nuestra unidad de medida: minutos (así es más ordenado calcular el adicional)
+    private var vehicleCounter = 0
+    private val baseFee = 120 //  Our time measuring unit: seconds (easier to calculate totals)
+    private val MINUTES_IN_MILISECONDS = 60000
+    private var saveCost = 0
+    private var cost = 0
+    private var parkedTime = 0L
+    private var totalRest = 0L
 
-    //val parkedTime : Long
-    private fun totalTime(checkInTime: Calendar) =
-        (Calendar.getInstance().timeInMillis - checkInTime.timeInMillis).toInt() / 60000 // retorna
 
-    // if totalTime <= 2h -> totalTime = 2h
-    // else if totalTime > 2h -> totalTime += 15m -> (totalTime + 15) <= (totalTime + 15)
-    // (totalTime + 15) puede ser una variable auxiliar? e.g. additionalTime
-    //
-    // if discountCard = true -> totalTime + (additionalTime * n) -> 15% off, donde 'n'= 15m adicionales
-
-    // Llamar lista de vehículos para tomar tipo y aplicar costo
+    private fun parkedTime(checkInTime: Calendar) =
+        (Calendar.getInstance().timeInMillis - checkInTime.timeInMillis) / MINUTES_IN_MILISECONDS // Function to calculate total parking time and evaluate conditions where a discount applies
 
     private fun calculateFee(
         vehicleType: Int,
-        totalTime: Int,
+        totalTime: Long,
         hasDiscountCard: String?
-    ): Int {  // function for calculate the parkingCost
+    ): Int {  // function to calculate the parkingCost
         val totalParkingCost = when {
-            totalTime <= baseFee -> vehicleType  // totalTime o totalTime()?
+            totalTime <= baseFee -> vehicleType
             totalTime > baseFee -> {
                 (vehicleType + with(totalTime - baseFee) {
+                    totalRest = this
                     var additionalFee = 0
-                    while (this > 0) {
+                    while (totalRest > 0) {
                         additionalFee += 5
-                        this - 15
+                        totalRest -= 15
                     }
                     additionalFee
                 })
             }
             else -> 0
         }
-        return hasDiscountCard?.let { totalParkingCost * 0.015.toInt() } ?: totalParkingCost
+        return hasDiscountCard?.let { (totalParkingCost * 0.15).toInt() } ?: totalParkingCost
     }
 
-    private fun checkOutVehicle(plate: String) {
-        instanceParking.searchableForPlate(plate)?.let {
-            val parkedTime = totalTime(it.checkInTime)
-            val cost = calculateFee(it.vehicleType, parkedTime, it.discountCard)
+    fun checkOutVehicle(plate: String) { // Let a vehicle go and calculate individual parked time and fee
+        searchableForPlate(plate)?.let {
+            parkedTime = parkedTime(it.checkInTime)
+            cost = calculateFee(it.vehicleType, parkedTime, it.discountCard)
             onSuccess(cost)
-            instanceParking.remove(it)
-            instanceParking.backUp(Pair(i.inc(), cost))
+            remove(it)
+            vehicleCounter++
+            saveCost += cost
+            backUp(Pair(vehicleCounter, saveCost))
         } ?: onError()
     }
 
-    private fun onSuccess(totalParkingCost: Int) {
+    private fun onSuccess(totalParkingCost: Int) { // function returns success if checkOutVehicle works
         println("Your fee is $totalParkingCost - Come back soon!")
     }
 
-    private fun onError() {  // function for happen error
+    private fun onError() {  // function returns error if checkOutVehicle fails
         println("Sorry, check-out failed")
-        // function return error to do checkOutVehicle
     }
 }
