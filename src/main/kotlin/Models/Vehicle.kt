@@ -1,4 +1,4 @@
-package vehicles
+package Models
 
 import java.util.*
 
