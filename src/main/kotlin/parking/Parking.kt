@@ -3,7 +3,7 @@ package parking
 import Models.Vehicle
 
 open class Parking {
-    private lateinit var vehicleRemoved: Pair<Int, Int>
+    private var vehicleRemoved: Pair<Int, Int> = Pair(0, 0)
     private val parkingSize = 20
     private val vehicles: MutableSet<Vehicle> = mutableSetOf()
 
@@ -12,7 +12,7 @@ open class Parking {
         return with(vehicles) {
             when {
                 this.size == parkingSize -> "Sorry, check-in failed"
-                this.add(vehicle) -> "Welcome to AlkeParking"
+                this.add(vehicle) -> "Welcome to AlkeParking, customer #${this.size}"
                 else -> "Sorry, check-in failed"
             }
         }
@@ -28,13 +28,12 @@ open class Parking {
     }
 
     fun backUp(vehicleRemoved: Pair<Int, Int>) {  // Prints total removed vehicles from the parking, plus total earnings
-        this.vehicleRemoved = Pair(vehicleRemoved.first, vehicleRemoved.second)
-        println("${vehicleRemoved.first} vehicles have checked out and have earnings of ${vehicleRemoved.second}")
+        this.vehicleRemoved =
+            this.vehicleRemoved.copy(first = vehicleRemoved.first, second = vehicleRemoved.second)
+        println("${this.vehicleRemoved.first} vehicles have checked out and have earnings of ${this.vehicleRemoved.second}")
     }
 
     fun listVehicles() { // List all parked vehicles
         vehicles.forEach { println(it.plate) }
     }
-
-
 }
