@@ -1,6 +1,7 @@
 package parking
 
 import java.util.*
+import kotlin.math.roundToInt
 
 class ParkingSpace : Parking() {
 
@@ -19,7 +20,7 @@ class ParkingSpace : Parking() {
     private fun calculateFee(
         vehicleType: Int,
         totalTime: Long,
-        hasDiscountCard: String?
+        hasDiscountCard: String?,
     ): Int {  // function to calculate the parkingCost
         val totalParkingCost = when {
             totalTime <= baseFee -> vehicleType
@@ -36,7 +37,7 @@ class ParkingSpace : Parking() {
             }
             else -> 0
         }
-        return hasDiscountCard?.let { (totalParkingCost * 0.15).toInt() } ?: totalParkingCost
+        return hasDiscountCard?.let { (totalParkingCost * 0.15).roundToInt() } ?: totalParkingCost
     }
 
     fun checkOutVehicle(plate: String) { // Let a vehicle go and calculate individual parked time and fee
