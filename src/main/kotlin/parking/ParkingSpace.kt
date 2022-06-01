@@ -6,7 +6,7 @@ import kotlin.math.roundToInt
 class ParkingSpace : Parking() {
 
     private var vehicleCounter = 0
-    private val baseFee = 120 //  Our time measuring unit: seconds (easier to calculate totals)
+    private val baseFee = 120
     private val MINUTES_IN_MILISECONDS = 60000
     private var saveCost = 0
     private var cost = 0
