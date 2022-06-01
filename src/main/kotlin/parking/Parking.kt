@@ -18,7 +18,7 @@ open class Parking {
         }
     }
 
-    fun searchableForPlate(plate: String): Vehicle? {  // Function searches a vehicle by its plate
+    fun searchableByPlate(plate: String): Vehicle? {  // Function searches a vehicle by its plate
         return vehicles.find { it.plate == plate }
     }
 

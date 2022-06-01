@@ -41,7 +41,7 @@ class ParkingSpace : Parking() {
     }
 
     fun checkOutVehicle(plate: String) { // Let a vehicle go and calculate individual parked time and fee
-        searchableForPlate(plate)?.let {
+        searchableByPlate(plate)?.let {
             parkedTime = parkedTime(it.checkInTime)
             cost = calculateFee(it.vehicleType, parkedTime, it.discountCard)
             onSuccess(cost)
